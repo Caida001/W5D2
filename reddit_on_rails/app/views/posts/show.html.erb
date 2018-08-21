@@ -1,0 +1,22 @@
+<%= @post.title %>
+<%= @post.url %>
+<%= @post.content %>
+<a href="<%=edit_post_url(@post)%> ">Edit My Post</a>
+<a href="<%=new_post_url%> ">Create My Post</a>
+
+
+<h3> Add Comment</h3>
+<form action="<%= posts_id %>" method="post">
+<input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+<a href="<%=new_post_comment_url(@post.id)%>"> Comment.content</a>
+</form>
+
+
+
+<ul>
+  <% @post.comments.where(parent_comment_id: nil).each do |parent| %>
+    <li>
+      <a href="<%= comment_url(parent) %>"></a>
+    </li>
+    <% end %>
+</ul>
